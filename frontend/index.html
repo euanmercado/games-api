@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <span class="icon">🎮</span>
+                <div>
+                    <h1>GameVault</h1>
+                    <p>Full-Stack API Management Interface</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="add-game-btn" class="btn btn-primary">+ Add New Game</button>
+                <button id="refresh-btn" class="btn btn-secondary">⚡ Refresh</button>
+            </div>
+        </header>
+
+        <div id="alert-box" class="alert hidden"></div>
+
+        <!-- Catalog Container -->
+        <main class="catalog-section">
+            <div class="catalog-header">
+                <h2>Game Catalog</h2>
+                <span id="game-count" class="badge-count">0 Games</span>
+            </div>
+            <div id="catalog-grid" class="catalog-grid"></div>
+        </main>
+    </div>
+
+    <!-- 1. ADD / EDIT GAME MODAL -->
+    <div id="form-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="modal-form-title">Add New Game</h2>
+                <button id="close-form-btn" class="modal-close">&times;</button>
+            </div>
+            <form id="game-form">
+                <input type="hidden" id="game-id">
+                
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" placeholder="e.g. Cyberpunk 2077" required>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="platform">Platform *</label>
+                        <input type="text" id="platform" placeholder="e.g. PC / PS5 / Xbox" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre *</label>
+                        <input type="text" id="genre" placeholder="e.g. Sci-Fi RPG" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="release_year">Release Year *</label>
+                        <input type="number" id="release_year" placeholder="e.g. 2020" min="1950" max="2030" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image_url">Cover Image URL</label>
+                        <input type="url" id="image_url" placeholder="https://example.com/cover.jpg">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" placeholder="Brief summary of what the game is about..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Save Game</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. GAME DETAILS EXPAND MODAL -->
+    <div id="detail-modal" class="modal-backdrop hidden">
+        <div class="modal-card detail-modal-card">
+            <button id="close-detail-btn" class="modal-close floating-close">&times;</button>
+            <div id="detail-cover-wrapper" class="detail-cover-wrapper"></div>
+            <div class="detail-body">
+                <h2 id="detail-title" class="detail-title"></h2>
+                <div class="detail-tags">
+                    <span id="detail-platform" class="tag tag-platform"></span>
+                    <span id="detail-genre" class="tag"></span>
+                    <span id="detail-year" class="tag tag-year"></span>
+                </div>
+                <div class="detail-description-box">
+                    <h3>About the Game</h3>
+                    <p id="detail-description"></p>
+                </div>
+                <div class="detail-actions">
+                    <button id="detail-edit-btn" class="btn btn-edit">✏️ Edit Game</button>
+                    <button id="detail-delete-btn" class="btn btn-delete">🗑️ Delete Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. CONFIRM DELETE MODAL -->
+    <div id="delete-modal" class="modal-backdrop hidden">
+        <div class="modal-card confirm-modal-card">
+            <h2>Delete Game?</h2>
+            <p>Are you sure you want to remove <strong id="delete-game-title">this game</strong> from your library? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancel-delete-btn" class="btn btn-ghost">Cancel</button>
+                <button id="confirm-delete-btn" class="btn btn-delete-confirm">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
